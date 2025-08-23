@@ -25,16 +25,16 @@
   | 更现代更安全的语法             | ✅ 是                          | ❌ 否                |
   | **macOS** 默认支持             | ✅ 是（**Catalina** 之后默认） | ✅ 是                |
 
-## 二、💥 代码讲解 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+## 二、💥 代码讲解 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-### 🎯 **Debug** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 **Debug** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 echo "📄 SCRIPT_PATH = $SCRIPT_PATH"
 read "?👉 按下回车开始执行，或 Ctrl+C 取消..."
 ```
 
-### 🎯 **Logo** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 **Logo** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 * ```shell
   print_logo() {
@@ -90,7 +90,7 @@ read "?👉 按下回车开始执行，或 Ctrl+C 取消..."
   }
   ```
 
-### 🎯 🖨️打印输出彩色函数 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 🖨️打印输出彩色函数 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 * ```shell
   SCRIPT_BASENAME=$(basename "$0" | sed 's/\.[^.]*$//')   # 当前脚本名（去掉扩展名）
@@ -243,7 +243,7 @@ read "?👉 按下回车开始执行，或 Ctrl+C 取消..."
   > # _JobsPrint_Underline "🔗 文档地址：https://example.com"
   > ```
 
-### 🎯 📔日志输出 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 📔日志输出 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 # ✅ 日志输出（日志文件名 == 脚本文件名）
@@ -270,13 +270,13 @@ init_logging() {
 }
 ```
 
-### 🎯 打开系统设置 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 打开系统设置 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 open "x-apple.systempreferences:com.apple.preference.security?Privacy"
 ```
 
-### 🎯 等待用户输入后执行 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 等待用户输入后执行 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 * ```shell
   wait_for_user_to_start() {
@@ -310,7 +310,7 @@ open "x-apple.systempreferences:com.apple.preference.security?Privacy"
   }
   ```
 
-### 🎯 判断是否当前IP在中国🇨🇳（大陆地区）<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 判断是否当前IP在🇨🇳中国（大陆地区）<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 is_in_china() {
@@ -325,7 +325,7 @@ is_in_china() {
 }
 ```
 
-### 🎯 git目录判定 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 [**git**](https://git-scm.com/)目录判定 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 is_git_repo() {
@@ -338,11 +338,11 @@ is_git_repo() {
 }
 ```
 
-### 🎯 获取系统变量 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 获取系统变量 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 1、路径
+#### 1、路径 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-##### 1.1、<font color=red>**获取：脚本所在目录的绝对路径**</font> <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+##### 1.1、<font color=red>**获取：脚本所在目录的绝对路径**</font> <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
   >- **${BASH_SOURCE[0]:-${(%):-%x}}**：获取当前脚本路径，兼容 **bash** 和 **zsh**。🔔 `:-` 是默认值语法（如果前者不存在就用后者）
   >  * **bash** 用 `BASH_SOURCE[0]`
@@ -370,7 +370,7 @@ cd "$SCRIPT_DIR" || {
 }
 ```
 
-##### 1.2、**获取：当前脚本文件名** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+##### 1.2、**获取：当前脚本文件名** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
   > `basename "$0"`：提取脚本文件的**文件名**部分（去除路径）
 
@@ -378,20 +378,20 @@ cd "$SCRIPT_DIR" || {
   script_file="$(basename "$0")"
   ```
 
-##### 1.3、**获取：脚本路径** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+##### 1.3、**获取：脚本路径** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")" && pwd)"
 SCRIPT_PATH="${SCRIPT_DIR}/$(basename -- "$0")"
 ```
 
-##### 1.4、**获取：桌面路径 **<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+##### 1.4、**获取：桌面路径 **<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
   ```shell
   DESKTOP_PATH=~/Desktop
   ```
 
-##### 1.5、循环问正确（判断依据解耦自定义拓展）的路径，直到正确为止
+##### 1.5、循环问正确（判断依据解耦自定义拓展）的路径，直到正确为止 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 #!/bin/zsh
@@ -476,7 +476,7 @@ main() {
 main "$@"
 ```
 
-#### 2、**获取：当前用户名** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 2、**获取：当前用户名** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
   > 用双引号 `"` 包裹起来，可以防止用户名中出现空格、特殊字符时发生错误
 
@@ -504,7 +504,7 @@ main "$@"
 | `id -un`  | 命令     | 当前有效用户的用户名（与 `whoami` 通常一样，但更底层）   |
 | `logname` | 命令     | 最初登录系统的用户（在 `sudo` 场景下可能与当前用户不同） |
 
-#### 3、**获取：🍏 Xcode 信息 **<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 3、**获取：🍏 Xcode 信息 **<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 print_xcode_info() {
@@ -518,7 +518,7 @@ print_xcode_info() {
 }
 ```
 
-#### 4、**获取：☕ Java 信息 ** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 4、**获取：☕ Java 信息 ** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```
 print_java_info() {
@@ -532,7 +532,7 @@ print_java_info() {
 }
 ```
 
-#### 5、**获取：🤖 Android SDK 信息** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 5、**获取：🤖  [Android](https://www.android.com/) SDK 信息** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 print_android_sdk_info() {
@@ -557,7 +557,7 @@ print_android_sdk_info() {
 }
 ```
 
-### 🎯 生成桌面快捷方式 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 生成桌面快捷方式 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 shortcut_name="${flutter_project_name}.command"
@@ -569,7 +569,7 @@ if [[ ! -f "$shortcut_path" ]]; then
 fi
 ```
 
-### 🎯 转换路径为<font color=red>**绝对路径**</font> <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 转换路径为<font color=red>**绝对路径**</font> <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 > **将用户输入的路径（文件或文件夹）转换为“绝对路径（不含软链接）”**，并去掉多余的双引号或末尾斜杠，增强兼容性。
 
@@ -590,7 +590,7 @@ abs_path() {
 }
 ```
 
-### 🎯 识别**`.xcodeproj`**  <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 识别**`.xcodeproj`**  <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 find_or_prompt_xcodeproj() {
@@ -612,7 +612,7 @@ find_or_prompt_xcodeproj() {
 }
 ```
 
-### 🎯 [**Android**](https://www.android.com/) 模拟器🤖<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 [**Android**](https://www.android.com/) 模拟器🤖<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 * 检查模拟器是否存在；启动一个可用的；设置并返回 `$device_id`
 
@@ -699,9 +699,9 @@ find_or_prompt_xcodeproj() {
   }
   ```
 
-### 🎯 **iOS** 模拟器📱<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 **iOS** 模拟器📱<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 1、（检测）防止假后台  <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 1、（检测）防止假后台  <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 > 如果是假后台：`xcrun simctl list devices | grep -E "Booted"` 控制台什么也不输出
 > 如果真后台：`xcrun simctl list devices | grep -E "Booted"` 控制台会有输出
@@ -725,7 +725,7 @@ fix_fake_simulator() {
 }
 ```
 
-#### 2、📱关闭 **iOS** 模拟器   <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 2、📱关闭 **iOS** 模拟器 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 xcrun simctl shutdown all
@@ -739,13 +739,13 @@ else
 fi
 ```
 
-#### 3、📱打开 **iOS** 模拟器   <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 3、📱打开 **iOS** 模拟器 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 open -a Simulator
 ```
 
-### 🎯 执行耗时  <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 执行耗时 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 START_TIME=$(date +%s) # 放在最前面
@@ -760,7 +760,7 @@ print_duration() {
 print_duration
 ```
 
-### 🎯 写文件 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 写文件 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 >* **追加写入**
 >
@@ -774,10 +774,10 @@ print_duration
 >
 >     ```shell
 >     cat <<EOF >> ~/.zshrc
->                            
+>                              
 >     # >>> Flutter 环境变量 >>>
 >     export PATH="\$HOME/.pub-cache/bin:\$PATH"
->                            
+>                              
 >     EOF
 >     ```
 >
@@ -793,15 +793,15 @@ print_duration
 >
 >     ```shell
 >      cat <<EOF > ~/.zshrc
->                                               
+>                                                   
 >      # >>> Flutter 环境变量 >>>
 >      export PATH="\$HOME/.pub-cache/bin:\$PATH"
->                                               
+>                                                   
 >      EOF
 >     ```
 >  
 
-#### 🎯 1、单行写文件（避免重复写入） <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 1、单行写文件（避免重复写入）<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 inject_shellenv_block() {
@@ -839,7 +839,7 @@ inject_shellenv_block() {
 }
 ```
 
-#### 🎯 2、多行写文件（避免重复写入） <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 2、多行写文件（避免重复写入）<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 append_env_block() {
@@ -867,7 +867,7 @@ append_env_block() {
 }
 ```
 
-#### 🎯 3、函数将内容插入到指定的文件顶部 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 3、函数将内容插入到指定的文件顶部 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 insert_block_to_profile_top() {
@@ -898,7 +898,7 @@ insert_block_to_profile_top() {
 > insert_block_to_profile_top "$marker" "${block[@]}"
 > ```
 
-### 🎯 环境变量 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 环境变量 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 | shell 类型 | 默认配置文件      | macOS 默认用哪个❓                                            |
 | ---------- | ----------------- | ------------------------------------------------------------ |
@@ -916,13 +916,13 @@ else
 fi
 ```
 
-#### 🎯 1、写单行的环境变量 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 1、写单行的环境变量 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 inject_shellenv_block "$HOME/.zprofile" 'eval "$(/opt/homebrew/bin/brew shellenv)"'
 ```
 
-#### 🎯 2、写多行的环境变量 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 2、写多行的环境变量 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 append_env_block "$HOME/.zshrc" \
@@ -930,7 +930,7 @@ append_env_block "$HOME/.zshrc" \
   'export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn'
 ```
 
-#### 🎯 3、🌐 环境变量格式化 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 3、🌐 环境变量格式化 <a href="#目的" style="font-size:17px; color:green;"><b>🔼 <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a></b></a>
 
 <font color=red>把环境变量 `$PATH` 中的路径项按冒号（`:`）拆分，并逐行打印每一项路径</font>
 
@@ -961,7 +961,7 @@ done
 /bin
 ```
 
-### 🎯 使用**`fzf`**  <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 使用**`fzf`**  <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 fzf_select() {
@@ -975,7 +975,7 @@ fzf_select() {
 > result=$(fzf_select "通过 Homebrew 安装" "通过 Git 安装" "取消")
 > ```
 
-### 🎯 判断芯片架构（`ARM64` / `x86_64`）<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 判断芯片架构（`ARM64` / `x86_64`）<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 get_cpu_arch() {
@@ -983,15 +983,15 @@ get_cpu_arch() {
 }
 ```
 
-### 🎯 [**SDKMAN**](https://sdkman.io/)  <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 [**SDKMAN**](https://sdkman.io/) <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```
 /// TODO
 ```
 
-### 🎯 💎[**Rubygems**](https://rubygems.org/) 自检安装 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 💎[**Rubygems**](https://rubygems.org/) 自检安装 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 🎯1、自检安装 💎**`Gem.CocoaPods`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯1、自检安装 💎**`Gem.CocoaPods`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 install_cocoaPods() {
@@ -1041,9 +1041,9 @@ install_bundler() {
 }
 ```
 
-### 🎯 🍺**`Homebrew`** 自检安装 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 🍺**`Homebrew`** 自检安装 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 🎯 1、自检安装 🍺**`Homebrew`** （自动架构判断，包含环境注入）<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 1、自检安装 🍺**`Homebrew`** （自动架构判断，包含环境注入）<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 install_homebrew() {
@@ -1147,7 +1147,7 @@ install_fzf() {
 }
 ```
 
-#### 🎯 3、自检安装 🍺**`Homebrew.jq`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 3、自检安装 🍺**`Homebrew.jq`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 install_jq() {
@@ -1174,7 +1174,7 @@ install_jq() {
 }
 ```
 
-#### 🎯 4、自检安装 🍺**`Homebrew.dart`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 4、自检安装 🍺**`Homebrew.dart`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 install_dart() {
@@ -1202,7 +1202,7 @@ install_dart() {
 }
 ```
 
-#### 🎯 5、自检安装 🍺**`Homebrew.coreutils`**（提供 `realpath`） <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 5、自检安装 🍺**`Homebrew.coreutils`**（提供 `realpath`）<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 install_coreutils() {
@@ -1232,7 +1232,7 @@ install_coreutils() {
 }
 ```
 
-#### 🎯 6、自检安装 🍺**`Homebrew.bc`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 6、自检安装 🍺**`Homebrew.bc`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 install_bc() {
@@ -1259,7 +1259,7 @@ install_bc() {
 }
 ```
 
-#### 🎯 7、自检安装 🍺**`Homebrew.Gradle`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 7、自检安装 🍺**`Homebrew.Gradle`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 install_gradle() {
@@ -1290,7 +1290,7 @@ install_gradle() {
 }
 ```
 
-#### 🎯 8、自检安装 🍺**`Homebrew.jenv`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 8、自检安装 🍺**`Homebrew.jenv`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 > [**Flutter**](https://flutter.dev/).[**Android**](https://www.android.com/)的运行和打包需要一个[**Java**](https://www.java.com/zh-CN/)环境（有必要和系统[**Java**](https://www.java.com/zh-CN/)环境进行区分开）
 >
@@ -1432,15 +1432,15 @@ install_rbenv() {
 >   ```shell
 >   jenv_remove_all_java() {
 >     echo "🧹 开始移除所有通过 Homebrew 安装并注册到 jenv 的 Java 版本..."
->                 
+>                   
 >     if [[ "$(uname -m)" == "arm64" ]]; then
 >       base_path="/opt/homebrew/opt"
 >     else
 >       base_path="/usr/local/opt"
 >     fi
->                 
+>                   
 >     found=false
->                 
+>                   
 >     for path in "$base_path"/openjdk*/libexec/openjdk.jdk/Contents/Home; do
 >       if [[ -d "$path" ]]; then
 >         echo "❌ 正在移除：$path"
@@ -1448,7 +1448,7 @@ install_rbenv() {
 >         found=true
 >       fi
 >     done
->                 
+>                   
 >     if [[ "$found" == false ]]; then
 >       echo "⚠️ 未检测到任何已注册 Java 安装路径"
 >     else
@@ -1458,7 +1458,7 @@ install_rbenv() {
 >   }
 >   ```
 
-#### 🎯 9、自检安装 🍺**`Homebrew.cocoapods`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 9、自检安装 🍺**`Homebrew.cocoapods`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 install_cocoapods() {
@@ -1488,7 +1488,40 @@ install_cocoapods() {
 }
 ```
 
-#### 🎯 10、自检安装 **`Rbenv`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 10、自检安装 🍺**`Homebrew.Perl`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+
+```dart
+ensure_perl_installed() {
+  if ! brew list perl &>/dev/null; then
+    warn_echo "📦 未检测到 Homebrew 安装的 Perl，正在安装..."
+    brew install perl || {
+      error_echo "❌ Perl 安装失败，请检查网络或更换镜像"
+      exit 1
+    }
+    success_echo "✅ Perl 安装成功"
+  else
+    info_echo "🔄 检测到 Perl。是否执行升级？"
+    echo "👉 按 [Enter] 继续：将执行  brew upgrade perl && brew cleanup"
+    echo "👉 输入任意字符后回车：跳过升级"
+
+    local confirm
+    IFS= read -r confirm
+    if [[ -z "$confirm" ]]; then
+      info_echo "⏳ 正在升级 Perl..."
+      brew upgrade perl      || { error_echo "❌ Perl 升级失败"; return 1; }
+      brew cleanup           || { warn_echo "⚠️ brew cleanup 执行时有警告"; }
+      success_echo "✅ Perl 已升级到最新版本"
+    else
+      note_echo "⏭️ 已选择跳过 Perl 升级"
+    fi
+  fi
+
+  # 🔍 打印版本并写入日志
+  perl -v | head -n 2 | tee -a "${LOG_FILE:-/tmp/install.log}"
+}
+```
+
+#### 🎯 11、自检安装 **`Rbenv`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 > `rbenv` 是一个 **Ruby 版本管理工具**
 
@@ -1546,7 +1579,7 @@ install_rbenv() {
 
 ```
 
-#### 🎯 11、官方安装 **`Ruby`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 12、官方安装 **`Ruby`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 # 1. 克隆 rbenv 到本地
@@ -1576,7 +1609,7 @@ rbenv global 3.3.0
 ruby -v
 ```
 
-### 🎯 （[**Dart**](https://dart.dev/)官方推荐）自检安装 **`fvm`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯（[**Dart**](https://dart.dev/)官方推荐）自检安装 **`fvm`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 > <font color=red>**安装`fvm`的大前提是预先安装`dart`环境 **</font>
 >
@@ -1616,7 +1649,7 @@ install_fvm() {
 
 ```
 
-### 🎯 设置**`Ruby`**镜像源（根据 IP 自动判断） <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 设置**`Ruby`**镜像源（根据 IP 自动判断）<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 set_gem_source() {
@@ -1634,9 +1667,9 @@ set_gem_source() {
 }
 ```
 
-### 🎯 镜像切换 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 镜像切换 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 1、[**CocoaPods**](https://cocoapods.org/) 镜像切换 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 1、[**CocoaPods**](https://cocoapods.org/) 镜像切换 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 switch_cocoapods_source() {
@@ -1657,7 +1690,7 @@ switch_cocoapods_source() {
 }
 ```
 
-#### 2、**Ruby** 镜像切换 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 2、[**Ruby**](https://www.ruby-lang.org/en/)  镜像切换 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 set_gem_source() {
@@ -1676,7 +1709,7 @@ set_gem_source() {
 }
 ```
 
-### 🎯 检测本地[**Java**](https://www.java.com/zh-CN/)环境是否已经安装 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 检测本地[**Java**](https://www.java.com/zh-CN/)环境是否已经安装 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 > **`command -v java`**：检查 `java` 命令是否存在于 `PATH` 中；
 >
@@ -1697,9 +1730,9 @@ else
 fi 
 ```
 
-### 🎯 [**Flutter**](https://flutter.dev/) <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 [**Flutter**](https://flutter.dev/) <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 🎯 1、判断当前目录是否为[**Flutter**](https://flutter.dev/)项目根目录 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 1、判断当前目录是否为[**Flutter**](https://flutter.dev/)项目根目录 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 is_flutter_project_root() {
@@ -1707,7 +1740,7 @@ is_flutter_project_root() {
 }
 ```
 
-#### 🎯 2、获取 [**Flutter**](https://flutter.dev/)项目名称  <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 2、获取 [**Flutter**](https://flutter.dev/)项目名称  <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 _get_flutter_project_name() {
@@ -1721,7 +1754,7 @@ _get_flutter_project_name() {
 }
 ```
 
-#### 🎯 3、判断[**Flutter**](https://flutter.dev/)文件是否是入口🚪 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 3、判断[**Flutter**](https://flutter.dev/)文件是否是入口🚪<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 > <font color=red>**支持的**`main`**函数写法**</font>
 > `void main() {}`// 标准同步入口
@@ -1791,7 +1824,7 @@ detect_entry() {
 }
 ```
 
-#### 🎯 4、统一获取[**Flutter**](https://flutter.dev/)项目路径和[**Dart**](https://dart.dev/)入口文件路径 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 4、统一获取[**Flutter**](https://flutter.dev/)项目路径和[**Dart**](https://dart.dev/)入口文件路径 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 > 兼容用户拖入目录、拖入[**Dart**](https://dart.dev/)文件、或直接回车（默认为当前目录为[**Flutter**](https://flutter.dev/)项目根目录）三种用法
 
@@ -1864,7 +1897,7 @@ resolve_flutter_root() {
 }
 ```
 
-#### 🎯 5、[**FVM**](https://fvm.app/) 检测 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 5、[**FVM**](https://fvm.app/) 检测 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```dart
 detect_flutter_cmd() {
@@ -1893,7 +1926,7 @@ fi
 >
 > 如果没有安装[**FVM**](https://fvm.app/) ，则 `flutter pub get`
 
-### 🎯 全更新 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 全更新 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 **`.zshrc`**
 
@@ -1906,7 +1939,7 @@ fi
  }
  ```
 
-### 🎯 删除🍺[**Homebrew**](https://brew.sh/) <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 删除🍺[**Homebrew**](https://brew.sh/) <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 # 1. 尝试 untap & 清理
@@ -1937,9 +1970,9 @@ if [[ -n "$brew_repo" ]]; then
 fi
 ```
 
-### 🎯 **`Git`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 **`Git`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 🎯 1、删除本地**`Git`**缓存目录 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 1、删除本地**`Git`**缓存目录 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 REPO_PATH="$HOME/.cocoapods/repos/cocoapods"
@@ -1951,7 +1984,7 @@ else
 fi
 ```
 
-#### 🎯 2、删除**`CDN`**源**`trunk`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 2、删除**`CDN`**源**`trunk`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 if pod repo list | grep -q "^trunk"; then
@@ -1962,16 +1995,16 @@ else
 fi
 ```
 
-#### 🎯 3、添加**`Git`**源 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 3、添加**`Git`**源<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 print_green "🔗 正在添加 Git 源 https://github.com/CocoaPods/Specs.git ..."
 pod repo add cocoapods https://github.com/CocoaPods/Specs.git
 ```
 
-### 🎯 `Shell` <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+### 🎯 `Shell` <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 🎯 1、切换`Shell` <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 1、切换`Shell` <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 # ========== 获取所有可用 shell ==========
@@ -1996,14 +2029,14 @@ echo "🔧 正在切换默认 shell 为：$selected_shell"
 chsh -s "$selected_shell"
 ```
 
-#### 🎯 2、显示当前`Shell` <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 2、显示当前`Shell` <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 echo "✅ 当前默认 shell 已更新为："
 dscl . -read ~/ UserShell
 ```
 
-#### 🎯 3、打开新的终端窗口并切换到脚本所在的目录 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 3、打开新的终端窗口并切换到脚本所在的目录 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 open_terminal_and_cd() {
@@ -2017,7 +2050,7 @@ EOF
 }
 ```
 
-#### 🎯 4、关闭终端窗口  <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 4、关闭终端窗口 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 close_terminal_window() {
@@ -2033,7 +2066,7 @@ close_terminal_window() {
 }
 ```
 
-#### 🎯 5、打开新的终端窗口  <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 5、打开新的终端窗口 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 open_terminal_and_cd() {
@@ -2052,7 +2085,7 @@ EOF
 > open_terminal_and_cd "$current_directory" # 打开新的终端窗口并切换到脚本所在的目录
 > ```
 
-#### 🎯 6、仅对当前`Shell`有效的临时环境  <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
+#### 🎯 6、仅对当前`Shell`有效的临时环境 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 # ================================== 通用开发环境变量配置 ==================================
@@ -2108,5 +2141,5 @@ export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
 # inject_shellenv_block "fvm_env" 'export PATH="$HOME/.pub-cache/bin:$PATH"'
 ```
 
-
+<a id="🔚" href="#前言" style="font-size:17px; color:green; font-weight:bold;">我是有底线的👉点我回到首页</a>
 
