@@ -774,10 +774,10 @@ print_duration
 >
 >     ```shell
 >     cat <<EOF >> ~/.zshrc
->                          
+>                            
 >     # >>> Flutter 环境变量 >>>
 >     export PATH="\$HOME/.pub-cache/bin:\$PATH"
->                          
+>                            
 >     EOF
 >     ```
 >
@@ -793,10 +793,10 @@ print_duration
 >
 >     ```shell
 >      cat <<EOF > ~/.zshrc
->                                           
+>                                               
 >      # >>> Flutter 环境变量 >>>
 >      export PATH="\$HOME/.pub-cache/bin:\$PATH"
->                                           
+>                                               
 >      EOF
 >     ```
 >  
@@ -1057,12 +1057,14 @@ install_homebrew() {
     warn_echo "🧩 未检测到 Homebrew，正在安装中...（架构：$arch）"
 
     if [[ "$arch" == "arm64" ]]; then
+      # Apple Silicon 原生 Homebrew（/opt/homebrew）
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || {
         error_echo "❌ Homebrew 安装失败（arm64）"
         exit 1
       }
       brew_bin="/opt/homebrew/bin/brew"
     else
+      # Intel 或在 Apple Silicon 下装一份 Intel 版 Homebrew（需要 Rosetta）
       arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || {
         error_echo "❌ Homebrew 安装失败（x86_64）"
         exit 1
@@ -1074,19 +1076,35 @@ install_homebrew() {
 
     # ==== 注入 shellenv 到对应配置文件（自动生效） ====
     shellenv_cmd="eval \"\$(${brew_bin} shellenv)\""
-
     case "$shell_path" in
       zsh)   profile_file="$HOME/.zprofile" ;;
       bash)  profile_file="$HOME/.bash_profile" ;;
       *)     profile_file="$HOME/.profile" ;;
     esac
-
     inject_shellenv_block "$profile_file" "$shellenv_cmd"
 
+    # 立刻对当前会话生效（不等重开终端）
+    eval "$(${brew_bin} shellenv)"
+
   else
-    info_echo "🔄 Homebrew 已安装，正在更新..."
-    brew update && brew upgrade && brew cleanup && brew doctor && brew -v
-    success_echo "✅ Homebrew 已更新"
+    info_echo "🔄 Homebrew 已安装。是否执行更新？"
+    echo "👉 按 [Enter] 继续：将依次执行  brew update && brew upgrade && brew cleanup && brew doctor && brew -v"
+    echo "👉 输入任意字符后回车：跳过更新"
+    # 仅当“直接回车”时继续；其他输入一律跳过
+    local confirm
+    IFS= read -r confirm
+    if [[ -z "$confirm" ]]; then
+      info_echo "⏳ 正在更新 Homebrew..."
+      # 分步执行，任一步失败立即报错退出，方便定位
+      brew update       || { error_echo "❌ brew update 失败"; return 1; }
+      brew upgrade      || { error_echo "❌ brew upgrade 失败"; return 1; }
+      brew cleanup      || { error_echo "❌ brew cleanup 失败"; return 1; }
+      brew doctor       || { warn_echo  "⚠️  brew doctor 有警告/错误，请按提示处理"; }
+      brew -v           || { warn_echo  "⚠️  打印 brew 版本失败（可忽略）"; }
+      success_echo "✅ Homebrew 已更新"
+    else
+      note_echo "⏭️ 已选择跳过 Homebrew 更新"
+    fi
   fi
 }
 ```
@@ -1111,9 +1129,20 @@ install_fzf() {
     brew install fzf || { error_echo "❌ fzf 安装失败"; exit 1; }
     success_echo "✅ fzf 安装成功"
   else
-    info_echo "🔄 fzf 已安装，升级中..."
-    brew upgrade fzf && brew cleanup
-    success_echo "✅ fzf 已是最新版"
+    info_echo "🔄 fzf 已安装。是否执行升级？"
+    echo "👉 按 [Enter] 继续：将依次执行  brew upgrade fzf && brew cleanup"
+    echo "👉 输入任意字符后回车：跳过升级"
+
+    local confirm
+    IFS= read -r confirm
+    if [[ -z "$confirm" ]]; then
+      info_echo "⏳ 正在升级 fzf..."
+      brew upgrade fzf       || { error_echo "❌ fzf 升级失败"; return 1; }
+      brew cleanup           || { warn_echo  "⚠️  brew cleanup 执行时有警告"; }
+      success_echo "✅ fzf 已升级到最新版本"
+    else
+      note_echo "⏭️ 已选择跳过 fzf 升级"
+    fi
   fi
 }
 ```
@@ -1127,9 +1156,20 @@ install_jq() {
     brew install jq || { error_echo "❌ jq 安装失败"; exit 1; }
     success_echo "✅ jq 安装成功"
   else
-    info_echo "🔄 jq 已安装，升级中..."
-    brew upgrade jq && brew cleanup
-    success_echo "✅ jq 已是最新版"
+    info_echo "🔄 jq 已安装。是否执行升级？"
+    echo "👉 按 [Enter] 继续：将依次执行  brew upgrade jq && brew cleanup"
+    echo "👉 输入任意字符后回车：跳过升级"
+
+    local confirm
+    IFS= read -r confirm
+    if [[ -z "$confirm" ]]; then
+      info_echo "⏳ 正在升级 jq..."
+      brew upgrade jq         || { error_echo "❌ jq 升级失败"; return 1; }
+      brew cleanup            || { warn_echo "⚠️ brew cleanup 执行时有警告"; }
+      success_echo "✅ jq 已升级到最新版本"
+    else
+      note_echo "⏭️ 已选择跳过 jq 升级"
+    fi
   fi
 }
 ```
@@ -1144,9 +1184,20 @@ install_dart() {
     brew install dart || { error_echo "❌ dart 安装失败"; exit 1; }
     success_echo "✅ dart 安装成功"
   else
-    info_echo "🔄 dart 已安装，升级中..."
-    brew upgrade dart && brew cleanup
-    success_echo "✅ dart 已是最新版"
+    info_echo "🔄 dart 已安装。是否执行升级？"
+    echo "👉 按 [Enter] 继续：将依次执行  brew upgrade dart && brew cleanup"
+    echo "👉 输入任意字符后回车：跳过升级"
+
+    local confirm
+    IFS= read -r confirm
+    if [[ -z "$confirm" ]]; then
+      info_echo "⏳ 正在升级 dart..."
+      brew upgrade dart       || { error_echo "❌ dart 升级失败"; return 1; }
+      brew cleanup            || { warn_echo "⚠️ brew cleanup 执行时有警告"; }
+      success_echo "✅ dart 已升级到最新版本"
+    else
+      note_echo "⏭️ 已选择跳过 dart 升级"
+    fi
   fi
 }
 ```
@@ -1156,13 +1207,27 @@ install_dart() {
 ```shell
 install_coreutils() {
   if ! command -v realpath >/dev/null; then
-    info "🔍 正在安装 coreutils（提供 realpath）"
-    brew install coreutils
+    note_echo "📦 未检测到 coreutils（提供 realpath），正在通过 Homebrew 安装..."
+    brew install coreutils || { error_echo "❌ coreutils 安装失败"; exit 1; }
+    success_echo "✅ coreutils 安装成功"
   else
-    _color_echo blue "🔄 coreutils 已安装，升级中..."
-    brew upgrade coreutils || true
-    _color_echo green "✅ coreutils 已是最新版"
+    info_echo "🔄 coreutils 已安装。是否执行升级？"
+    echo "👉 按 [Enter] 继续：将依次执行  brew upgrade coreutils"
+    echo "👉 输入任意字符后回车：跳过升级"
+
+    local confirm
+    IFS= read -r confirm
+    if [[ -z "$confirm" ]]; then
+      info_echo "⏳ 正在升级 coreutils..."
+      brew upgrade coreutils || { error_echo "❌ coreutils 升级失败"; return 1; }
+      brew cleanup           || { warn_echo "⚠️ brew cleanup 执行时有警告"; }
+      success_echo "✅ coreutils 已升级到最新版本"
+    else
+      note_echo "⏭️ 已选择跳过 coreutils 升级"
+    fi
   fi
+
+  # 确保 coreutils 提供的命令优先级最高
   export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 }
 ```
@@ -1176,9 +1241,20 @@ install_bc() {
     brew install bc || { error_echo "❌ bc 安装失败"; exit 1; }
     success_echo "✅ bc 安装成功"
   else
-    info_echo "🔄 bc 已安装，升级中..."
-    brew upgrade bc && brew cleanup
-    success_echo "✅ bc 已是最新版"
+    info_echo "🔄 bc 已安装。是否执行升级？"
+    echo "👉 按 [Enter] 继续：将依次执行  brew upgrade bc && brew cleanup"
+    echo "👉 输入任意字符后回车：跳过升级"
+
+    local confirm
+    IFS= read -r confirm
+    if [[ -z "$confirm" ]]; then
+      info_echo "⏳ 正在升级 bc..."
+      brew upgrade bc        || { error_echo "❌ bc 升级失败"; return 1; }
+      brew cleanup           || { warn_echo "⚠️ brew cleanup 执行时有警告"; }
+      success_echo "✅ bc 已升级到最新版本"
+    else
+      note_echo "⏭️ 已选择跳过 bc 升级"
+    fi
   fi
 }
 ```
@@ -1192,9 +1268,20 @@ install_gradle() {
     brew install gradle || { error_echo "❌ Gradle 安装失败"; exit 1; }
     success_echo "✅ Gradle 安装成功"
   else
-    info_echo "🔄 Gradle 已安装，升级中..."
-    brew upgrade gradle && brew cleanup
-    success_echo "✅ Gradle 已是最新版"
+    info_echo "🔄 Gradle 已安装。是否执行升级？"
+    echo "👉 按 [Enter] 继续：将依次执行  brew upgrade gradle && brew cleanup"
+    echo "👉 输入任意字符后回车：跳过升级"
+
+    local confirm
+    IFS= read -r confirm
+    if [[ -z "$confirm" ]]; then
+      info_echo "⏳ 正在升级 Gradle..."
+      brew upgrade gradle    || { error_echo "❌ Gradle 升级失败"; return 1; }
+      brew cleanup           || { warn_echo "⚠️ brew cleanup 执行时有警告"; }
+      success_echo "✅ Gradle 已升级到最新版本"
+    else
+      note_echo "⏭️ 已选择跳过 Gradle 升级"
+    fi
   fi
 
   # 🔍 输出当前版本（带版本号高亮）
@@ -1212,39 +1299,58 @@ install_gradle() {
 > [**Java**](https://www.java.com/zh-CN/)来源：官方Java、[**OpenJDK**](https://openjdk.org/)、[**temurin**](https://adoptium.net/zh-CN/temurin/releases)
 
 ```shell
-install_jenv() {
-  if ! command -v jenv &>/dev/null; then
-    info_echo "📦 未检测到 jenv，正在通过 Homebrew 安装..."
-    brew install jenv || { error_echo "❌ jenv 安装失败"; exit 1; }
-    success_echo "✅ jenv 安装成功"
+install_rbenv() {
+  if ! command -v rbenv &>/dev/null; then
+    info_echo "📦 未检测到 rbenv，正在通过 Homebrew 安装..."
+    brew install rbenv ruby-build || { error_echo "❌ rbenv 安装失败"; exit 1; }
+    success_echo "✅ rbenv 安装成功"
+
+    # ✅ 仅在首次安装后，写入 rbenv 环境变量到对应 shell 配置文件
+    local shellrc
+    if [[ -n "$ZSH_VERSION" || "${SHELL##*/}" == "zsh" ]]; then
+      shellrc="$HOME/.zshrc"
+    else
+      shellrc="$HOME/.bash_profile"
+    fi
+
+    # 确保文件存在，避免 grep 报错
+    [[ -f "$shellrc" ]] || touch "$shellrc"
+
+    if ! grep -qF '# >>> rbenv 初始化 >>>' "$shellrc"; then
+      info_echo "📎 正在写入 rbenv 初始化配置到：$shellrc"
+      {
+        echo ''
+        echo '# >>> rbenv 初始化 >>>'
+        echo 'export PATH="$HOME/.rbenv/bin:$PATH"'
+        echo 'eval "$(rbenv init -)"'
+        echo '# <<< rbenv 初始化 <<<'
+      } >> "$shellrc"
+      success_echo "✅ rbenv 初始化配置已写入 $shellrc"
+    else
+      info_echo "📌 rbenv 初始化配置已存在于 $shellrc"
+    fi
+
   else
-    info_echo "🔄 jenv 已安装，升级中..."
-    brew upgrade jenv && brew cleanup
-    success_echo "✅ jenv 已是最新版"
+    info_echo "🔄 rbenv 已安装。是否执行升级？"
+    echo "👉 按 [Enter] 继续：将依次执行  brew upgrade rbenv ruby-build && brew cleanup"
+    echo "👉 输入任意字符后回车：跳过升级"
+
+    local confirm
+    IFS= read -r confirm
+    if [[ -z "$confirm" ]]; then
+      info_echo "⏳ 正在升级 rbenv..."
+      brew upgrade rbenv ruby-build || { error_echo "❌ rbenv 升级失败"; return 1; }
+      brew cleanup                  || { warn_echo  "⚠️ brew cleanup 执行时有警告"; }
+      success_echo "✅ rbenv 已升级到最新版本"
+    else
+      note_echo "⏭️ 已选择跳过 rbenv 升级"
+    fi
   fi
 
-  # ✅ 设置 jenv 环境变量（追加到 .zshrc 或 .bash_profile）
-  local shellrc="$HOME/.zshrc"
-  [[ -n "$ZSH_VERSION" ]] || shellrc="$HOME/.bash_profile"
-
-  if ! grep -q 'jenv init' "$shellrc"; then
-    info_echo "📎 正在写入 jenv 初始化配置到：$shellrc"
-    {
-      echo ''
-      echo '# >>> jenv 初始化 >>>'
-      echo 'export PATH="$HOME/.jenv/bin:$PATH"'
-      echo 'eval "$(jenv init -)"'
-      echo '# <<< jenv 初始化 <<<'
-    } >> "$shellrc"
-    success_echo "✅ jenv 初始化配置已写入 $shellrc"
-  else
-    info_echo "📌 jenv 初始化配置已存在于 $shellrc"
-  fi
-
-  # ✅ 当前 shell 生效
-  export PATH="$HOME/.jenv/bin:$PATH"
-  eval "$(jenv init -)"
-  success_echo "🟢 jenv 初始化完成并在当前终端生效"
+  # ✅ 当前会话立即生效
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+  success_echo "🟢 rbenv 初始化完成并在当前终端生效"
 }
 ```
 
@@ -1326,15 +1432,15 @@ install_jenv() {
 >   ```shell
 >   jenv_remove_all_java() {
 >     echo "🧹 开始移除所有通过 Homebrew 安装并注册到 jenv 的 Java 版本..."
->               
+>                 
 >     if [[ "$(uname -m)" == "arm64" ]]; then
 >       base_path="/opt/homebrew/opt"
 >     else
 >       base_path="/usr/local/opt"
 >     fi
->               
+>                 
 >     found=false
->               
+>                 
 >     for path in "$base_path"/openjdk*/libexec/openjdk.jdk/Contents/Home; do
 >       if [[ -d "$path" ]]; then
 >         echo "❌ 正在移除：$path"
@@ -1342,7 +1448,7 @@ install_jenv() {
 >         found=true
 >       fi
 >     done
->               
+>                 
 >     if [[ "$found" == false ]]; then
 >       echo "⚠️ 未检测到任何已注册 Java 安装路径"
 >     else
@@ -1361,13 +1467,24 @@ install_cocoapods() {
     brew install cocoapods || { error_echo "❌ CocoaPods 安装失败"; exit 1; }
     success_echo "✅ CocoaPods 安装成功"
   else
-    info_echo "🔄 CocoaPods 已安装，升级中..."
-    brew upgrade cocoapods && brew cleanup
-    success_echo "✅ CocoaPods 已是最新版"
+    info_echo "🔄 CocoaPods 已安装。是否执行升级？"
+    echo "👉 按 [Enter] 继续：将依次执行  brew upgrade cocoapods && brew cleanup"
+    echo "👉 输入任意字符后回车：跳过升级"
+
+    local confirm
+    IFS= read -r confirm
+    if [[ -z "$confirm" ]]; then
+      info_echo "⏳ 正在升级 CocoaPods..."
+      brew upgrade cocoapods || { error_echo "❌ CocoaPods 升级失败"; return 1; }
+      brew cleanup           || { warn_echo "⚠️ brew cleanup 执行时有警告"; }
+      success_echo "✅ CocoaPods 已升级到最新版本"
+    else
+      note_echo "⏭️ 已选择跳过 CocoaPods 升级"
+    fi
   fi
 
   # ✅ 打印版本并写入日志
-  pod --version | tee -a "$LOG_FILE"
+  pod --version | tee -a "${LOG_FILE:-/tmp/install.log}"
 }
 ```
 
@@ -1381,18 +1498,52 @@ install_rbenv() {
     info_echo "📦 未检测到 rbenv，正在通过 Homebrew 安装..."
     brew install rbenv ruby-build || { error_echo "❌ rbenv 安装失败"; exit 1; }
     success_echo "✅ rbenv 安装成功"
+
+    # ✅ 首次安装：写入环境变量到 shell 配置文件
+    local shellrc
+    if [[ -n "$ZSH_VERSION" || "${SHELL##*/}" == "zsh" ]]; then
+      shellrc="$HOME/.zshrc"
+    else
+      shellrc="$HOME/.bash_profile"
+    fi
+    [[ -f "$shellrc" ]] || touch "$shellrc"
+
+    if ! grep -qF '# >>> rbenv 初始化 >>>' "$shellrc"; then
+      info_echo "📎 正在写入 rbenv 初始化配置到：$shellrc"
+      {
+        echo ''
+        echo '# >>> rbenv 初始化 >>>'
+        echo 'export PATH="$HOME/.rbenv/bin:$PATH"'
+        echo 'eval "$(rbenv init -)"'
+        echo '# <<< rbenv 初始化 <<<'
+      } >> "$shellrc"
+      success_echo "✅ rbenv 初始化配置已写入 $shellrc"
+    else
+      info_echo "📌 rbenv 初始化配置已存在于 $shellrc"
+    fi
   else
-    info_echo "🔄 rbenv 已安装，升级中..."
-    brew upgrade rbenv ruby-build && brew cleanup
-    success_echo "✅ rbenv 已是最新版"
+    info_echo "🔄 rbenv 已安装。是否执行升级？"
+    echo "👉 按 [Enter] 继续：将依次执行  brew upgrade rbenv ruby-build && brew cleanup"
+    echo "👉 输入任意字符后回车：跳过升级"
+
+    local confirm
+    IFS= read -r confirm
+    if [[ -z "$confirm" ]]; then
+      info_echo "⏳ 正在升级 rbenv..."
+      brew upgrade rbenv ruby-build || { error_echo "❌ rbenv 升级失败"; return 1; }
+      brew cleanup                  || { warn_echo "⚠️ brew cleanup 执行时有警告"; }
+      success_echo "✅ rbenv 已升级到最新版本"
+    else
+      note_echo "⏭️ 已选择跳过 rbenv 升级"
+    fi
   fi
 
-  # ✅ 初始化 rbenv 环境（写入当前 shell）
+  # ✅ 当前会话立即生效
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
-
-  success_echo "🟢 rbenv 环境已初始化"
+  success_echo "🟢 rbenv 环境已初始化并在当前终端生效"
 }
+
 ```
 
 #### 🎯 11、官方安装 **`Ruby`** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
@@ -1437,15 +1588,32 @@ install_fvm() {
     note_echo "📦 未检测到 fvm，正在通过 dart pub global 安装..."
     dart pub global activate fvm || { error_echo "❌ fvm 安装失败"; exit 1; }
     success_echo "✅ fvm 安装成功"
+
+    # ✅ 首次安装：写入并让当前会话立刻可用
+    inject_shellenv_block "fvm_env" 'export PATH="$HOME/.pub-cache/bin:$PATH"'
   else
-    info_echo "🔄 fvm 已安装，正在升级..."
-    dart pub global activate fvm
-    success_echo "✅ fvm 已是最新版"
+    info_echo "🔄 fvm 已安装。是否执行升级？"
+    echo "👉 按 [Enter] 继续：将执行  dart pub global activate fvm（幂等升级）"
+    echo "👉 输入任意字符后回车：跳过升级"
+
+    local confirm
+    IFS= read -r confirm
+    if [[ -z "$confirm" ]]; then
+      info_echo "⏳ 正在升级 fvm..."
+      dart pub global activate fvm || { error_echo "❌ fvm 升级失败"; return 1; }
+      success_echo "✅ fvm 已升级到最新版本"
+    else
+      note_echo "⏭️ 已选择跳过 fvm 升级"
+    fi
+
+    # 确保 PATH 中包含 pub-cache（若先前未写入过）
+    export PATH="$HOME/.pub-cache/bin:$PATH"
   fi
-	fvm --version | tee -a "$LOG_FILE"
-  # ✅ 自动注入 ~/.pub-cache/bin 到 PATH（用统一结构封装）
-  inject_shellenv_block "fvm_env" 'export PATH="$HOME/.pub-cache/bin:$PATH"'
+
+  # 🔍 输出当前版本并写入日志
+  fvm --version | tee -a "${LOG_FILE:-/tmp/install.log}"
 }
+
 ```
 
 ### 🎯 设置**`Ruby`**镜像源（根据 IP 自动判断） <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a>
