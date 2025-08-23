@@ -2,7 +2,7 @@
 
 [toc]
 
-## 一、🎯 <font id=目的>**目的**</font>
+## 🎯 <font id=目的>**项目白皮书**</font>
 
 * 虽然**Shell**脚本晦涩难懂，但相较于**python**等脚本，因为减少了一层系统封装调用，所以使得**shell**脚本具有更大的普适度
 
@@ -25,7 +25,7 @@
   | 更现代更安全的语法             | ✅ 是                          | ❌ 否                |
   | **macOS** 默认支持             | ✅ 是（**Catalina** 之后默认） | ✅ 是                |
 
-## 二、💥 代码讲解 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+## 💥 代码讲解 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ### 🎯 **Debug** <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
@@ -325,7 +325,9 @@ is_in_china() {
 }
 ```
 
-### 🎯 [**git**](https://git-scm.com/)目录判定 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+### 🎯 [**git**](https://git-scm.com/) <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+
+#### 1、目录判定 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 is_git_repo() {
@@ -335,6 +337,39 @@ is_git_repo() {
   # 裸仓库（可选）
   [[ -f "$dir/HEAD" && -d "$dir/objects" && -d "$dir/refs" ]] && return 0
   return 1
+}
+```
+
+#### 2、检测远程仓库 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+
+```shell
+ensure_git_remote() {
+  local remote_name="${1:-origin}"
+  local remote_url
+
+  # 如果已经存在远程仓库，直接提示并返回
+  if git remote get-url "$remote_name" >/dev/null 2>&1; then
+    info_echo "已存在 git remote [$remote_name] -> $(git remote get-url "$remote_name")"
+    return 0
+  fi
+
+  # 循环直到用户输入有效的远程地址
+  while true; do
+    read -rp "请输入远程仓库地址 (例如 https://github.com/user/repo.git): " remote_url
+    if [[ -z "$remote_url" ]]; then
+      warn_echo "输入为空，请重新输入"
+      continue
+    fi
+
+    # 验证远程是否可访问
+    if git ls-remote "$remote_url" >/dev/null 2>&1; then
+      git remote add "$remote_name" "$remote_url"
+      success_echo "已成功配置 git remote [$remote_name] -> $remote_url"
+      break
+    else
+      error_echo "无法访问 $remote_url，请检查地址是否正确"
+    fi
+  done
 }
 ```
 
@@ -774,10 +809,10 @@ print_duration
 >
 >     ```shell
 >     cat <<EOF >> ~/.zshrc
->                              
+>                                
 >     # >>> Flutter 环境变量 >>>
 >     export PATH="\$HOME/.pub-cache/bin:\$PATH"
->                              
+>                                
 >     EOF
 >     ```
 >
@@ -793,10 +828,10 @@ print_duration
 >
 >     ```shell
 >      cat <<EOF > ~/.zshrc
->                                                   
+>                                                       
 >      # >>> Flutter 环境变量 >>>
 >      export PATH="\$HOME/.pub-cache/bin:\$PATH"
->                                                   
+>                                                       
 >      EOF
 >     ```
 >  
@@ -1432,15 +1467,15 @@ install_rbenv() {
 >   ```shell
 >   jenv_remove_all_java() {
 >     echo "🧹 开始移除所有通过 Homebrew 安装并注册到 jenv 的 Java 版本..."
->                   
+>                     
 >     if [[ "$(uname -m)" == "arm64" ]]; then
 >       base_path="/opt/homebrew/opt"
 >     else
 >       base_path="/usr/local/opt"
 >     fi
->                   
+>                     
 >     found=false
->                   
+>                     
 >     for path in "$base_path"/openjdk*/libexec/openjdk.jdk/Contents/Home; do
 >       if [[ -d "$path" ]]; then
 >         echo "❌ 正在移除：$path"
@@ -1448,7 +1483,7 @@ install_rbenv() {
 >         found=true
 >       fi
 >     done
->                   
+>                     
 >     if [[ "$found" == false ]]; then
 >       echo "⚠️ 未检测到任何已注册 Java 安装路径"
 >     else
