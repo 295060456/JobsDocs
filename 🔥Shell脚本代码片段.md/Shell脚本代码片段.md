@@ -278,6 +278,22 @@ open "x-apple.systempreferences:com.apple.preference.security?Privacy"
 
 ### 🎯 等待用户输入后执行 <a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
+* ```
+  # ✅ 通用：回车跳过，任意字符执行
+  ask_run() {
+    echo ""
+    note_echo "👉 $1"
+    gray_echo "【回车=跳过，任意字符=执行】"
+    local input
+    read "input?➤ "
+    [[ -n "$input" ]]
+  }
+  ```
+
+  > ```shell
+  > ask_run "安装/更新 Homebrew？" && install_homebrew
+  > ```
+
 * ```shell
   wait_for_user_to_start() {
     read '?XXX 任意键=跳过： ' sim_input
@@ -289,6 +305,15 @@ open "x-apple.systempreferences:com.apple.preference.security?Privacy"
   }
   ```
   
+  > ```shell
+  > echo "准备执行 flutter clean..."
+  > if wait_for_user_to_start; then
+  >   flutter clean
+  > else
+  >   echo "跳过 flutter clean"
+  > fi
+  > ```
+  
 * ```shell
   wait_for_user_to_start() {
     echo ""
@@ -296,6 +321,12 @@ open "x-apple.systempreferences:com.apple.preference.security?Privacy"
     echo ""
   }
   ```
+  
+  > ```shell
+  > echo "即将执行 flutter build..."
+  > wait_for_user_to_start
+  > flutter build apk --release
+  > ```
   
 * ```shell
   wait_for_user_to_start() {
@@ -309,6 +340,14 @@ open "x-apple.systempreferences:com.apple.preference.security?Privacy"
     echo "🧨 正在卸载 XXX..."
   }
   ```
+  
+  > ```shell
+  > echo "准备执行危险操作：卸载 XXX"
+  > wait_for_user_to_start
+  > # 真正的卸载命令放这里
+  > rm -rf /usr/local/XXX
+  > echo "✅ 卸载完成"
+  > ```
 
 ### 🎯 判断是否当前IP在🇨🇳中国（大陆地区）<a href="#目的" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
@@ -809,10 +848,10 @@ print_duration
 >
 >     ```shell
 >     cat <<EOF >> ~/.zshrc
->                                
+>                                  
 >     # >>> Flutter 环境变量 >>>
 >     export PATH="\$HOME/.pub-cache/bin:\$PATH"
->                                
+>                                  
 >     EOF
 >     ```
 >
@@ -828,10 +867,10 @@ print_duration
 >
 >     ```shell
 >      cat <<EOF > ~/.zshrc
->                                                       
+>                                                           
 >      # >>> Flutter 环境变量 >>>
 >      export PATH="\$HOME/.pub-cache/bin:\$PATH"
->                                                       
+>                                                           
 >      EOF
 >     ```
 >  
@@ -1467,15 +1506,15 @@ install_rbenv() {
 >   ```shell
 >   jenv_remove_all_java() {
 >     echo "🧹 开始移除所有通过 Homebrew 安装并注册到 jenv 的 Java 版本..."
->                     
+>                       
 >     if [[ "$(uname -m)" == "arm64" ]]; then
 >       base_path="/opt/homebrew/opt"
 >     else
 >       base_path="/usr/local/opt"
 >     fi
->                     
+>                       
 >     found=false
->                     
+>                       
 >     for path in "$base_path"/openjdk*/libexec/openjdk.jdk/Contents/Home; do
 >       if [[ -d "$path" ]]; then
 >         echo "❌ 正在移除：$path"
@@ -1483,7 +1522,7 @@ install_rbenv() {
 >         found=true
 >       fi
 >     done
->                     
+>                       
 >     if [[ "$found" == false ]]; then
 >       echo "⚠️ 未检测到任何已注册 Java 安装路径"
 >     else
