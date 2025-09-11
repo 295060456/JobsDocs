@@ -6,14 +6,49 @@
 
 ### 1.1、<font id=TCP/IP>`TCP/IP` 协议簇</font>
 
+* **TCP/IP** 协议簇的构成
+
+  ```mermaid
+  graph TB
+  
+    subgraph L4["应用层 Application Layer"]
+      direction LR
+      A1["HTTP / HTTPS"] --- A2["FTP / TFTP"] --- A3["SMTP / POP3 / IMAP"] --- A4["DNS"] --- A5["Telnet / SSH"] --- A6["SNMP / DHCP"]
+    end
+  
+    subgraph L3["传输层 Transport Layer"]
+      direction LR
+      B1["TCP"] --- B2["UDP"]
+    end
+  
+    subgraph L2["网络层 Internet Layer"]
+      direction LR
+      C1["IP (IPv4, IPv6)"] --- C2["ICMP"] --- C3["IGMP"] --- C4["ARP / RARP"]
+    end
+  
+    subgraph L1["网络接口层 Link Layer"]
+      direction LR
+      D1["Ethernet"] --- D2["PPP / SLIP"] --- D3["Wi-Fi"] --- D4["Frame Relay / ATM"]
+    end
+  
+    %% 层次连接
+    L4 --> L3
+    L3 --> L2
+    L2 --> L1
+  ```
+
 * 用于网络通信的协议族，是互联网的核心协议；（本质是数据的加密和解密）
+
 * 定义了计算机如何通过网络相互通信；
+
 * `TCP/IP` 的常见应用场景：
+  
   * **文件传输**：通过 FTP 协议上传和下载文件；
   * **网页浏览**：通过 HTTP/HTTPS 协议访问网站；
   * **远程登录**：通过 SSH 访问远程服务器；
   * **电子邮件**：通过 SMTP、POP3、IMAP 收发邮件；
   * **实时通信**：通过 UDP 实现视频通话或在线游戏；
+  
 * `TCP/IP` 的优点：
   * **跨平台**：可用于不同的硬件和操作系统；
   * **扩展性强**：支持不同规模的网络；
@@ -278,7 +313,9 @@
     * **Web Worker**：允许在后台运行 JavaScript 代码而不阻塞主线程；
     * **Geolocation API**：支持定位功能，适用于移动端开发；
 
-### 1.4、RTMP = <font color=red>R</font>eal-<font color=red>T</font>ime <font color=red>M</font>essaging <font color=red>P</font>rotocol
+### 1.4、RTMP
+
+> 即， <font color=red>R</font>eal-<font color=red>T</font>ime <font color=red>M</font>essaging <font color=red>P</font>rotocol
 
 * 即：实时消息传输协议。是一个**基于[TCP](TCP/IP)的协议**
 
@@ -338,7 +375,9 @@
     * 现代内容分发网络（CDN）更倾向支持基于 HTTP 的协议（如 HLS 和 DASH），因为它们可以直接利用 HTTP 缓存机制和现有的基础设施；
     * RTMP 作为专用协议，与这些现代 CDN 的优化机制不完全兼容，使用成本较高；
   
-### 1.5、HLS = <font color=red>H</font>TTP <font color=red>L</font>ive <font color=red>S</font>treaming
+### 1.5、HLS
+
+> 即，<font color=red>H</font>TTP <font color=red>L</font>ive <font color=red>S</font>treaming
 
 * 由 **Apple** 开发的流媒体传输协议，<u>**基于 HTTP/HTTPS**</u>，与现代网络基础设施（如 CDN）无缝集成；
 * 使用分段视频文件（TS 或 fMP4 ）和索引文件（<font color=red>`.m3u8`</font>）实现视频点播和直播功能。视频以小文件传输，丢包率低，即使网络不稳定也能平稳播放；
@@ -352,7 +391,9 @@
   * 高并发直播（如体育赛事转播）；
   * 需要多设备兼容性的直播平台；
   * 延迟要求不高的场景，如新闻直播
-### 1.6、<font id=WebRTC>**WebRTC**</font> = <font color=red>Web</font> <font color=red>R</font>eal-<font color=red>T</font>ime <font color=red>C</font>ommunication
+### 1.6、<font id=WebRTC>**WebRTC**</font>
+
+> 即，<font color=red>Web</font> <font color=red>R</font>eal-<font color=red>T</font>ime <font color=red>C</font>ommunication
 
 * 开源技术，能够通过简单的 API，允许浏览器↔️移动设备，通过点对点的方式进行实时音频、视频和数据传输，无需安装插件；
   
@@ -394,7 +435,9 @@
   | **技术架构** |  复杂（需要信令、NAT 穿透等）  |       简单（基于 HTTP）        |
   | **适配 CDN** | 不支持（点对点传输，无法缓存） | 完美支持（利用 HTTP 分发内容） |
 
-### 1.7、<font id=SRT>**SRT**</font>= <font color=red>S</font>ecure <font color=red>R</font>eliable <font color=red>T</font>ransport
+### 1.7、<font id=SRT>**SRT**</font>
+
+>即，<font color=red>S</font>ecure <font color=red>R</font>eliable <font color=red>T</font>ransport
 
 * SRT 是由 **Haivision** 公司开发的一种基于 UDP 的流媒体传输协议，专为**低延迟、可靠性和安全性**而设计；
 * 它常用于视频直播和远程内容分发；
@@ -417,7 +460,9 @@
   * **Handshake：** SRT 在建立连接时使用 UDP 协议完成握手；
     * **数据传输：** SRT 在应用层实现数据的重传和排序，确保接收端接收完整的数据流；
     * **时间窗口：** SRT 引入了发送端和接收端的缓冲区时间窗口，以平衡延迟和传输质量；
-### 1.8、<font id=RTP>**RTP**</font> = <font color=red>R</font>eal-time <font color=red>T</font>ransport <font color=red>P</font>rotocol
+### 1.8、<font id=RTP>**RTP**</font>
+
+> 即，<font color=red>R</font>eal-time <font color=red>T</font>ransport <font color=red>P</font>rotocol
 
 * RTP 是一种**实时传输协议**，专为实时音视频传输设计，**通常与 RTP 控制协议（[RTCP](#RTCP)）一起使用**，用于音视频的同步和质量监控；
 
@@ -473,7 +518,9 @@
     |   备注   | 需要高可靠性、强安全性以及在复杂网络环境下的稳定性<br/>（如公网直播） | 追求极低延迟并能容忍一定程度的数据丢失 |
   
 
-### 1.9、MQTT = <font color=red>M</font>essage <font color=red>Q</font>ueuing <font color=red>T</font>elemetry <font color=red>T</font>ransport
+### 1.9、MQTT
+
+> 即，<font color=red>M</font>essage <font color=red>Q</font>ueuing <font color=red>T</font>elemetry <font color=red>T</font>ransport
 
 * <u>轻量级</u>的**发布/订阅**消息传输协议；
 
@@ -585,7 +632,9 @@
   Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
   ```
   
-### 1.11、<font id=SIP>SIP</font> = <font color=red>S</font>ession <font color=red>I</font>nitiation <font color=red>P</font>rotocol
+### 1.11、<font id=SIP>SIP</font>
+
+> 即，<font color=red>S</font>ession <font color=red>I</font>nitiation <font color=red>P</font>rotocol
 
 * 用于建立、管理和终止 VoIP 呼叫的信令协议；
 
@@ -610,7 +659,9 @@
   - 比 [SIP](#SIP) 更复杂，但兼容性好；
   - 包括呼叫控制、媒体传输、信令管理等功能；
 
-### 1.13、<font id=VoIP>VoIP</font> = <font color=red>V</font>oice <font color=red>o</font>ver <font color=red>I</font>nternet <font color=red>P</font>rotocol
+### 1.13、<font id=VoIP>VoIP</font>
+
+> 即，<font color=red>V</font>oice <font color=red>o</font>ver <font color=red>I</font>nternet <font color=red>P</font>rotocol
 
 * 互联网语音协议，VoIP 也被称为 IP 语音或网络电话技术；
 * 将模拟信号（如声音）转换为数字信号，通过网络传输到对端，实现通话功能；
